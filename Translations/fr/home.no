@@ -1,7 +1,1 @@
-# You can define here your translations
-# In this example if the site must be print in french
-# It will replace "Get started" by "Commencer"
 Get started : Commencer
-
-# You can create as much file as you want with explicit name
-# You must put them in the folder that correspond to the language code

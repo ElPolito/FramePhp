@@ -6,7 +6,6 @@
 		private $content;
 
 		public function __construct ($view, $param = null) {
-			require "_config/hide/translation.php";
 			$translate = new Translation();
 			$filePath = "Templates/" . explode(":",$view)[0] . "/" . explode(":", $view)[1] . ".php";
 			$file = file_get_contents($filePath);

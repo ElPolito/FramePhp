@@ -1,10 +1,10 @@
 <?php 
 	
 	// Define your database informations
-	define("HOST", "");
-	define("USER", "");
+	define("HOST", "localhost");
+	define("USER", "root");
 	define("PASS", "");
-	define("DB", "");
+	define("DB", "framephp");
 
 	if(HOST != "") {
 		try{

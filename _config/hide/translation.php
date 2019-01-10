@@ -7,10 +7,7 @@
 		private $default = "en";
 
 		public function __construct () {
-			$files = scandir("Translations");
-			foreach ($files as $f) {
-				
-			}
+			
 		}
 
 		public function translate($word){

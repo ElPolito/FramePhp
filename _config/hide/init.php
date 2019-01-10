@@ -1,4 +1,5 @@
 <?php 
+	use Project\_config\Translation;
 
 	// User Entity (for connection)
 	require "_config/hide/entity.php";
@@ -7,10 +8,10 @@
 	session_start();
 
 	// Config
-	
 	require "_config/utilities/DAO.php";
 	require "_config/hide/defines.php";
 	require "_config/hide/translation.php";
+	$translate = new Translation();
 	require "_config/hide/route.php";
 	require "_config/hide/template.php";
 	require "_config/hide/controller.php";

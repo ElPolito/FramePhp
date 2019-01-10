@@ -1,25 +1,8 @@
 <?php 
 	
-	// User Entity (for connection)
-	require "_config/hide/entity.php";
-	// End
+	define("TESTS", false);
 
-	session_start();
-
-	// Config
-	require "_config/utilities/DAO.php";
-	require "_config/hide/translation.php";
-	require "_config/hide/route.php";
-	require "_config/hide/template.php";
-	require "_config/hide/controller.php";
-	require "_config/hide/services.php";
-	require "_config/hide/dblink.php";
-	require "_config/hide/defines.php";
-	// End
-
-	// Your script(s) to interact with the database(s)
-	require "_config/connectdb.php";
-	// End
+	require "_config/hide/init.php";
 
 	$routes->submit();
 ?>

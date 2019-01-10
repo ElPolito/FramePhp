@@ -27,7 +27,7 @@
 		}
 
 		private function getCurLang(){
-			return substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2);
+			return isset($_SERVER["HTTP_ACCEPT_LANGUAGE"]) ? substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2) : "en";
 		}
 
 		private function getLangWords($lang){

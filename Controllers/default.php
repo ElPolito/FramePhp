@@ -16,10 +16,10 @@
 		// Home Page ...
 		public function home () {
 			
-			UserDAO::getAllUsers();
+			$users = UserDAO::getAllUsers();
 
 			// This is how you can use templates
-			$view = new Template("Global:home");
+			$view = new Template("Global:home", array("users" => $users));
 			return $view->showTime();
 
 			// However you can also just send text

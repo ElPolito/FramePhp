@@ -1,4 +1,6 @@
 <?php 
+	
+	namespace Project\_config;
 
 	class Translation {
 

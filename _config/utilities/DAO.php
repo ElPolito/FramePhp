@@ -1,5 +1,7 @@
 <?php 
 
+namespace Project\_config;
+
 abstract class DAO {
 
 	private static function _query ($sql, $args = null) {

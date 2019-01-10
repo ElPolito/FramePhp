@@ -1,5 +1,7 @@
 <?php 
 	
+	namespace Project\_config;
+
 	class Route {
 
 		private $_uris = [];
@@ -21,7 +23,7 @@
 
 					if(substr($uri, 0, strlen($real)) == $real){
 						if($uri == $key){
-							$con = explode(":", $value)[0] . "Controller";
+							$con = "Project\Controllers\\" . explode(":", $value)[0] . "Controller";
 							$controller = new $con;
 							$func = explode(":", $value)[1];
 							echo strval($controller->$func());
@@ -30,7 +32,7 @@
 						}else{
 							if(substr_count($key, "/") === substr_count($uri, "/")){
 								$args = substr($uri, strlen($real), strlen($uri));
-								$con = explode(":", $value)[0] . "Controller";
+								$con = "Project\Controllers\\" . explode(":", $value)[0] . "Controller";
 								$controller = new $con;
 								$func = explode(":", $value)[1];
 								echo strval($controller->$func($args));
@@ -38,7 +40,7 @@
 								break;
 							}else if($addSlash[$i]){
 								$args = substr($uri, strlen($real), strlen($uri));
-								$con = explode(":", $value)[0] . "Controller";
+								$con = "Project\Controllers\\" . explode(":", $value)[0] . "Controller";
 								$controller = new $con;
 								$func = explode(":", $value)[1];
 								echo strval($controller->$func($args));
@@ -49,7 +51,7 @@
 					}
 				}else{
 					if($uri == $key){
-						$con = explode(":", $value)[0] . "Controller";
+						$con = "Project\Controllers\\" . explode(":", $value)[0] . "Controller";
 						$controller = new $con;
 						$func = explode(":", $value)[1];
 						echo strval($controller->$func());

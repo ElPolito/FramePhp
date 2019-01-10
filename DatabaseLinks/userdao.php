@@ -1,6 +1,10 @@
 <?php 
 	
-	require_once 'Classes/Entities/user.php';
+	namespace Project\DatabaseLinks;
+
+	use Project\_config\DAO;
+	use Project\Classes\Entities\User;
+	
 
 	class UserDAO {
 

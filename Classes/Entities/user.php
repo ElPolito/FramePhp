@@ -1,5 +1,6 @@
 <?php 
 	
+	namespace Project\Classes\Entities;	
 
 	// This is a demo class for your users the variables should be on your database
 	/*

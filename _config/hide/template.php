@@ -1,5 +1,6 @@
 <?php 
 	
+	namespace Project\_config;
 
 	class Template {
 

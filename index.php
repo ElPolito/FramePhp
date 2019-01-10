@@ -12,6 +12,7 @@
 	require "_config/hide/controller.php";
 	require "_config/hide/services.php";
 	require "_config/hide/dblink.php";
+	require "_config/hide/defines.php";
 	// End
 
 	// Your script(s) to interact with the database(s)

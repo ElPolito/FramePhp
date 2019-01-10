@@ -7,6 +7,7 @@
 	session_start();
 
 	// Config
+	require "_config/utilities/DAO.php";
 	require "_config/hide/route.php";
 	require "_config/hide/template.php";
 	require "_config/hide/controller.php";

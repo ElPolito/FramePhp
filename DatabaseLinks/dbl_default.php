@@ -1,26 +1,32 @@
 <?php 
-	// This is a demo of a database link script
+	
+	require_once 'Classes/Entities/user.php';
 
-	/* 
-	You can create as much script as you want
-	then you can call these functions in your controllers
-	*/
+	class UserDAO {
 
+		public static function getAllUsers () {
+			$datas = DAO::queryAll("SELECT * FROM User");
+			$result = [];
+			foreach ($datas as $value) {
+				$result[] = new User($value["ID"], $value["MAIL"], $value["PASS"], $value["PSEUDO"], $value["PIC"]);
+			}
+			return $result;
+		}
 
-	// This is an example about how you can get a user with his ID
-	/*
-	You must start by declare your database as global then execute your query
-	and don't forget to require_once your entities if you need them
-	*/
-    function getUserById ($userId) {
-		global $db;
-		$q = $db->prepare("SELECT * FROM user WHERE ID_User = ?");
-		$q->execute([$userId]);
-		$res = $q->fetch();
-		require_once("Classes/Entities/user.php");
-		$user = new User($res["ID_User"], $res["Mail"], $res["Pass"], $res["Pseudo"], $res["Pic"]);
-		$q->closeCursor();
-		return $user;
+		public static function getUserById ($id) {
+			$datas = DAO::queryRow("SELECT * FROM User WHERE ID = ?", [$id]);
+			$result = new User($datas["ID"], $datas["MAIL"], $datas["PASS"], $datas["PSEUDO"], $datas["PIC"]);
+			return $result;
+		}
+
+		public static function updateUser ($user) {
+			DAO::queryRow("UPDATE User SET MAIL = ?, PASS = ?, PSEUDO = ?, PIC = ? WHERE ID = ?", [$user->getMail(), $user->getPass(), $user->getPseudo(), $user->getPic(), $user->getId()]);
+		}
+
+		public static function deleteUser ($user) {
+			DAO::queryRow("DELETE FROM User WHERE ID = ?", [$user->getId()]);
+		}
+
 	}
 
 

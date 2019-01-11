@@ -1,6 +1,6 @@
 <?php 
 	
-	namespace Project\_config;
+	namespace Project\_config\hide;
 
 	class Route {
 

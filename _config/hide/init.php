@@ -1,26 +1,28 @@
 <?php 
-	use Project\_config\Translation;
+	use Project\_config\hide\Translation;
 
 	// User Entity (for connection)
-	require "_config/hide/entity.php";
+	require "_config/hide/requires/entity.php";
 	// End
 
 	session_start();
 
 	// Config
 	require "_config/utilities/DAO.php";
-	require "_config/hide/defines.php";
+	require "_config/utilities/controller.php";
+	require "_config/hide/requires/defines.php";
 	require "_config/hide/translation.php";
 	$translate = new Translation();
 	require "_config/hide/route.php";
 	require "_config/hide/template.php";
-	require "_config/hide/controller.php";
-	require "_config/hide/services.php";
-	require "_config/hide/dblink.php";
+	require "_config/hide/requires/controller.php";
+	require "_config/hide/requires/services.php";
+	require "_config/hide/requires/dblink.php";
+	require "_config/hide/connectdb.php";
 	// End
 
 	// Your script(s) to interact with the database(s)
-	require "_config/connectdb.php";
+	require "_config/databases.php";
 	// End
 
 

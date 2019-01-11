@@ -2,10 +2,12 @@
 
 namespace Project\_config;
 
+use Project\_config\hide\DB;
+
 abstract class DAO {
 
-	private static function _query ($sql, $args = null) {
-		global $db;
+	private static function _query ($sql, $args = null, $db = null) {
+		$db = DB::getDB($db);
 		if($args == null) {
 			$pdos = $db->query($sql);
 		}else{
@@ -15,9 +17,9 @@ abstract class DAO {
 		return $pdos;
 	}
 
-	public static function queryRow ($sql, $args = null) {
+	public static function queryRow ($sql, $args = null, $db = null) {
 		try {
-			$pdos = DAO::_query($sql, $args);
+			$pdos = DAO::_query($sql, $args, $db);
 			$res = $pdos->fetch();
 			$pdos->closeCursor();
 		}catch(PDOException $e) {
@@ -30,9 +32,9 @@ abstract class DAO {
 		return $res;
 	}
 
-	public static function queryAll ($sql, $args = null) {
+	public static function queryAll ($sql, $args = null, $db = null) {
 		try {
-			$pdos = DAO::_query($sql, $args);
+			$pdos = DAO::_query($sql, $args, $db);
 			$res = $pdos->fetchAll();
 			$pdos->closeCursor();
 		}catch(PDOException $e) {

@@ -4,7 +4,7 @@
 
 	class DB {
 
-		private static $dbs = [];
+		public static $dbs = [];
 
 		public static function addDB ($name, $host, $user, $pass, $db, $engine = "mysql") {
 			try{

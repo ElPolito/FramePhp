@@ -2,20 +2,18 @@
 
 	namespace Project\Classes\Entities;
 
-	class User {
+	class Mytable {
 
 		private $id = null;
 		private $mail = null;
-		private $pass = null;
 		private $pseudo = null;
-		private $pic = null;
+		private $name = null;
 
-		public function __construct ($id, $mail, $pass, $pseudo, $pic) {
+		public function __construct ($id, $mail, $pseudo, $name) {
 			$this->id = $id;
 			$this->mail = $mail;
-			$this->pass = $pass;
 			$this->pseudo = $pseudo;
-			$this->pic = $pic;
+			$this->name = $name;
 		}
 
 		public function getId () {
@@ -34,14 +32,6 @@
 			$this->mail = $mail;
 		}
 
-		public function getPass () {
-			return $this->pass;
-		}
-
-		public function setPass ($pass) {
-			$this->pass = $pass;
-		}
-
 		public function getPseudo () {
 			return $this->pseudo;
 		}
@@ -50,12 +40,12 @@
 			$this->pseudo = $pseudo;
 		}
 
-		public function getPic () {
-			return $this->pic;
+		public function getName () {
+			return $this->name;
 		}
 
-		public function setPic ($pic) {
-			$this->pic = $pic;
+		public function setName ($name) {
+			$this->name = $name;
 		}
 
 	}

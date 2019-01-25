@@ -15,6 +15,7 @@
 	$translate = new Translation();
 	require "_config/hide/route.php";
 	require "_config/hide/template.php";
+	if(USETWIG) require "_config/hide/twigtemplate.php";
 	require "_config/hide/requires/controller.php";
 	require "_config/hide/requires/services.php";
 	require "_config/hide/requires/dblink.php";

@@ -15,7 +15,6 @@
 		
 		// Home Page ...
 		public function home () {
-			
 			$users = UserDAO::getAllUsers();
 
 			// This is how you can use templates

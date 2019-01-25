@@ -3,6 +3,7 @@
 	use Project\Tests\TestManager;
 
 	define("TESTS", true);
+	define("USETWIG", false);
 
 	// Config
 	require "_config/hide/init.php";

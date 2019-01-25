@@ -8,10 +8,10 @@
 	class UserDAO {
 
 		public static function getAllUsers () {
-			$datas = DAO::queryAll("SELECT * FROM user");
+			$datas = DAO::queryAll("SELECT * FROM user", null, "first");
 			$result = [];
 			foreach ($datas as $value) {
-				$result[] = new User ($value['id'], $value['mail'], $value['pass'], $value['pseudo'], $value['pic']);
+				$result[] = new User ($value['ID'], $value['MAIL'], $value['PASS'], $value['PSEUDO'], $value['PIC']);
 			}
 			return $result;
 		}

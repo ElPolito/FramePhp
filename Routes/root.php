@@ -16,7 +16,8 @@
 	On your controller method you must add a parameter whiwh will contain the {blogId} value
 	You can also add multiple variables like that /blog/{date}/{name} but you will get {date}/{name} in your method parameter then you can treat it as you want
 	*/
-	$routes->add("/blog/{blogId}", "YourController:YourMethod");
+	$routes->add("/vip/{id}", "Vip:toto");
+	$routes->add("/blog/{blogId}/toto/{id}/titi", "YourController:YourMethod");
 
 
 ?>

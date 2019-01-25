@@ -1,5 +1,6 @@
 <?php 
 
+define("PRODUCTION", false);
 define("PATH", "/framephp");
 define("ASSET", "/framephp/Assets/");
 define("DEBUG_GLOBAL", false);

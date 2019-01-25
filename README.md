@@ -116,3 +116,26 @@ Par :
 ```
 $view = $this->twigtemplate("Global:home", array("users" => $users));
 ```
+Encore un dernier effort, pour utiliser twig, vos templates doivent être des fichiers **.twig** et non **.php**.
+
+### Utiliser votre base de données
+Ok du coup c'est cool, on peut envoyer des données depuis le contrôleur et les récupérer dans les templates maintenant il nous reste un problème, comment on fait pour récupérer les données qui sont dans la base de données ?
+
+Et bien cette partie repose sur deux dossiers principalement : le dossier "**DatabaseLinks**" qui contient toutes les requètes en base de données et le dossier "**Classes/Entities**" qui contient toutes cos entitées.
+
+#### Les entitées
+Dans le dossier **Classes/Entities** on va mettre toutes nos entitées c'est à dire des classes représentant nos tables dans la base de données. 
+C'est aussi simple que ça.
+
+#### Les databaselinks
+Maintenant qu'on a créé nos entitées pour accueillir nos données provenant de la base de données on va pouvoir commencer à s'en servir pour récupérer, insérer, modifier ou supprimer nos données.
+
+C'est à ça que vont servir les classes dans le dossier **DatabaseLinks**. Chaque entité aura une classe correspondante dans ce dossier.
+Ce sont des classes **DAO** (objet d'accès aux données). Dans ces classes on va ajouter autant de méthode qu'on le souhaite pour récupérer toutes les données d'une table ou seulement certaines, supprimer, modifier ou insérer des données.
+
+Pour vous faciliter la tâche, on vous a créé un objet **DAO** qui possède deux méthodes statiques : **queryAll** pour récupérer plusieurs lignes d'une table et qui renvoie un tableau de tableaux de données et **queryRow** qui permet de modifier, supprimer ou insérer des données. La deuxième méthode **queryRow** permet aussi de récupérer une seule ligne et renvoie dans ce cas là un tableau simple de données.
+
+Ces deux méthodes prennent en premier paramètre une chaîne de charactère représentant une requête sql qui peut contenir des "**?**" pour les données à insérer. Le deuxième paramètre (facultatif) permet de spécifier un tableau de données pour remplacer les "**?**".
+Enfin le dernier paramètre ne concerne que ceux qui utilisent plusieurs bases de données et il permet de spécifier le nom de la base de données à utiliser.
+
+**Ok, du coup on est pas mal là. On peut maintenant ajouter des routes qui vont appeler des fonctions dans nos classes contrôleurs qui elles-mêmes cont pouvoir contacter les DAO pour traiter les données et enfin pouvoir renvoyer un template à l'utilisateur.**

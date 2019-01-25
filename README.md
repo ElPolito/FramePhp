@@ -138,4 +138,15 @@ Pour vous faciliter la tâche, on vous a créé un objet **DAO** qui possède de
 Ces deux méthodes prennent en premier paramètre une chaîne de charactère représentant une requête sql qui peut contenir des "**?**" pour les données à insérer. Le deuxième paramètre (facultatif) permet de spécifier un tableau de données pour remplacer les "**?**".
 Enfin le dernier paramètre ne concerne que ceux qui utilisent plusieurs bases de données et il permet de spécifier le nom de la base de données à utiliser.
 
-**Ok, du coup on est pas mal là. On peut maintenant ajouter des routes qui vont appeler des fonctions dans nos classes contrôleurs qui elles-mêmes cont pouvoir contacter les DAO pour traiter les données et enfin pouvoir renvoyer un template à l'utilisateur.**
+
+***Ok, du coup on est pas mal là. On peut maintenant ajouter des routes qui vont appeler des fonctions dans nos classes contrôleurs qui elles-mêmes cont pouvoir contacter les DAO pour traiter les données et enfin pouvoir renvoyer un template à l'utilisateur.***
+
+### Les variables globales
+Le dossier "**Defines**" permet de définir des variables que vous allez pouvoir utiliser partout dans votre application.
+Un premier fichier est déjà présent et il est très important. Il contient les différentes variables nécéssaires au bon fonctionnement de votre application.
+On y retrouve une variable *PRODUCTION* qui spécifie l'état de l'application, des variables pour les chemins importants de l'application et des variables pour le debuggage.
+
+Mais vous pouvez ajouter autant de fichier dans ce dossier que vous le souhaitez afin de définir vos propres variables.
+
+### Traduire son application
+

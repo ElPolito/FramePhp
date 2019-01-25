@@ -56,5 +56,63 @@ use Project\_config\utilities\Controller;
 Ces deux lignes sont essentielles pour tous les contrôleurs. 
 On définit ensuite une classe nommée **DefaultController** qui étend **Controller**
 ```
-class DefaultController extends Controller{
+class DefaultController extends Controller {
+```
+On retrouve ici notre fonction **home** qui est utilisée dans notre définition de route.
+En fait on peut créer autant de fichier qui vont servir de contrôleurs qu'on le souhaite tant qu'ils sont tous dans le dossier "**Controllers**".
+Dans une classe **controller** on peut également créer autant de fonctions que nous le souhaitons. 
+Si on reprend notre exemple de site avec une partie forum et une partie utilisateur, on aurait un contrôleur "**UserController**" avec les fonction "**profil**", "**modifierprofil** ... et un contrôleur "**ForumController**".
+Chaque fonction d'un contrôleur qui va être appelée pour une route donnée doit renvoyer du texte.
+On peut donc juste mettre un **return "toto";** ou bien utiliser le système de "templates".
+
+### Le système de templates
+Pour utiliser le système de templates fournit par **FramePhp**, il suffit de créer un fichier "**.php**" dans un des sous-dossier de "**Templates**". C'est ici que vous devez mettre votre code **html**. Sauf que l'intérêt d'avoir un fichier "**php**" c'est que vous allez pouvoir utiliser des variables.
+Pour notre forum, par exemple, on voudrait pouvoir voir tous les posts qui sont dans notre base de données, on peut alors les récupérer dans le contrôleur puis les envoyer à notre template.
+
+C'est bien beau tout ça mais on fait comment ?
+
+Et bien c'est très simple dans votre contrôleur, il faut créer un objet **Template** comme ceci :
+```
+$view = $this->template("Global:home", array("users" => $users));
+```
+Le premier paramètre de la fonction **template** correspond au chemin du template. Par exemple, si on a créé un fichier **home.php** dans le dossier **Forum** lui-même dans le dossier **Templates**, il faut indiquer **"Forum:home"** si on a une architecture un peu plsu complexe, on peut tout à fait mettre **"Forum:Post/home"**. Comme vous l'avez remarqué, on ne précise pas le type de fichier. Vous devez donc absolument faire référence à des fichiers **php**.
+Le deuxième paramètre de la fonction **template** est facultatif, c'est un tableau associatif qui va contenir toutes les données que l'on veut faire passer dans le template. Pour notre système de posts, on mettrait **array("posts" => $posts)** en supposant que l'on ai récupérer les différents posts dans la variable **$post**. Il ne faut pas oublier que c'est un tableau on peut donc mettre autant de données qu'on le souhaite (array("posts" => $posts, "page" => $page, "user" => $user)).
+Finalement on obtiendrait : 
+```
+$view = $this->template("Forum:home", array("posts" => $posts));
+```
+On a dit plus haut qu'un contrôleur devait forcément retourner du texte. On va donc appeler la méthode **showTime** qui permet de faire le traitement du template. On peut alors retourner la valeur renvoyer.
+```
+return $view->showTime();
+```
+
+Ok, du coup maintenant on peut faire passer des variables depuis notre comtrôleur jusqu'à notre template mais comment on fait pour les récupérer ?
+
+Et bien c'est très simple, dans le fichier template, on peut ouvrir des balises php et avoir accès à ce tableau que l'on a définit précédemment. Il suffit de mettre :
+```
+<?php 
+$param["posts"];
+?>
+```
+Ce code ne sert à rien mais il vous montre comment récupérer la variable contenant tous les posts.
+
+#### Le gestionnaire de templates Twig
+En fait, mettre des balises php de partout dans les template, c'est un peu long, on vous a donc donné la possibilité d'utiliser le moteur de template **Twig** qui permet d'avoir un code beaucoup plus beau. On ne va pas vous expliquer ici comment cela fonctionne, la documentation de twig est très bien faite : "https://twig.symfony.com/". On va juste vous montré comment l'utiliser.
+Pour utiliser **twig** on va tout d'abord devoir l'importer :
+```
+composer require "twig/twig:^2.0"
+```
+Ensuite, on va se rendre dans le fichier **index.php** à la racine du projet pour y modifier une variable.
+A la ligne :
+```
+define("USETWIG", false);
+```
+on va mettre **true** à la place de **false**.
+C'est bon vous êtes prêt à utiliser Twig. Il suffit juste de remplacer dans vos contrôleurs la ligne :
+```
+$view = $this->template("Global:home", array("users" => $users));
+```
+Par : 
+```
+$view = $this->twigtemplate("Global:home", array("users" => $users));
 ```

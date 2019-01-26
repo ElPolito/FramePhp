@@ -42,6 +42,18 @@ Par exemple si on veut créer un page de connnexion on mettra "**/connexion**". 
 Le deuxième paramètre de cette fonction permet de spécifier le contrôleur que l'on devra utiliser ainsi que la fonction a appeler.
 En effet, "**Default:home**" signifie que l'on va utiliser le contrôleur "**DefaultController**" et que l'on va appeler sa fonction "**home**".
 
+En fait on peut créer des routes bien plus complexes. Imaginons que nous voulions créer un blog, si nous étions dans un projet php normal, il aurait fallu créer un fichier pour chaque articles ou utiliser des addresses du type : **monblog.fr/blog?article=monarticle** ce qui n'est pas très beau. Et bien avec framephp on va pouvoir transformer ces addresses en **monblog.fr/blog/monarticle**. 
+En fait on va ajouter une variable dans notre route. C'est à dire que l'on va spécifier qu'une partie de la routes n'est pas fixe.
+On fait ça en ajoutant des **{}** à la place d'un mot.
+Pour notre exemple de blog on aurait :
+```
+$routes->add("/blog/{nomArticle}", "Blog:article");
+```
+Le nom que vous donnez entre les **{}** ne sert pas à grand chose, il est là uniquement pour vous pour que vous puissiez vous y retrouver. En réalité on peut créer des routes beaucoup plus complexes comme : 
+```
+$routes->add("/vip/{idVip}/request/{idRequest}/modify", "Vip:modifyRequest");
+```
+
 Maintenant que nous savons comment créer des routes voyons comment fonctionnent les contrôleurs.
 
 ### Les contrôleurs
@@ -64,6 +76,10 @@ Dans une classe **controller** on peut également créer autant de fonctions que
 Si on reprend notre exemple de site avec une partie forum et une partie utilisateur, on aurait un contrôleur "**UserController**" avec les fonction "**profil**", "**modifierprofil** ... et un contrôleur "**ForumController**".
 Chaque fonction d'un contrôleur qui va être appelée pour une route donnée doit renvoyer du texte.
 On peut donc juste mettre un **return "toto";** ou bien utiliser le système de "templates".
+
+Si vous avez utiliser le système de routes complexes avec les **{}** deux cas se distinguent.
+Si votre route ne contient qu'une seule variable, votre contrôleur doit prendre un paramètre qui contiendra cette variable.
+Si votre route contient plusieurs variable, votre contrôleur doit prendre un paramètre qui contiendra un tableau contenant toutes les variables.
 
 ### Le système de templates
 Pour utiliser le système de templates fournit par **FramePhp**, il suffit de créer un fichier "**.php**" dans un des sous-dossier de "**Templates**". C'est ici que vous devez mettre votre code **html**. Sauf que l'intérêt d'avoir un fichier "**php**" c'est que vous allez pouvoir utiliser des variables.
@@ -117,6 +133,18 @@ Par :
 $view = $this->twigtemplate("Global:home", array("users" => $users));
 ```
 Encore un dernier effort, pour utiliser twig, vos templates doivent être des fichiers **.twig** et non **.php**.
+
+### Mettre en forme votre site
+Vous voulez sans doute avoir un site avec un minimum de graphismes et donc pouvoir utiliser du CSS, du Javascript et des images.
+Pour cela rien de plus facile, on a mis à votre disposition un dossier **Assets** dans lequel vous allez pouvoir mettre ces différents éléments.
+Ensuite, dans vos templates pour ajouter du css on ajoute :
+```
+<link rel="stylesheet" type="text/css" href="<?= ASSETS . 'CSS/home.css' ?>" />
+```
+Et c'est le même principe pour les fichiers Javascript ou les images.
+Attention, il faut que la variable globale **ASSETS** soit bien initialisée dans le fichier **Defines/default.php**.
+
+Vous pouvez aussi utiliser la variable **PATH** pour vos liens dans les balises **a**.
 
 ### Utiliser votre base de données
 Ok du coup c'est cool, on peut envoyer des données depuis le contrôleur et les récupérer dans les templates maintenant il nous reste un problème, comment on fait pour récupérer les données qui sont dans la base de données ?

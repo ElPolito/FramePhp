@@ -1,6 +1,6 @@
 # FramePhp
 
-## Commençons
+## Bien démarrer
 Pour utiliser FramePhp, il suffit de cloner ce dépot dans votre projet :
 ```
 git clone https://github.com/ElPolito/FramePhp.git
@@ -157,3 +157,60 @@ Ensuite il suffit de mettre cette ligne :
 ```
 Il vous faut donc mettre cette ligne dans les templates à chaque fois que vous souhaitez traduire un mot ou une phrase.
 Ensuite il suffit de se rendre dans le dossier "**Translations**" dans lequel vous allez trouver un dossier "**fr**" en fait ici il faut mettre autant de dossier que de langues supportées par votre site. Le nom des dossiers doit correspondre aux codes des différentes langues. Dans ces dossiers vous pouvez mettre autant de fichier "**.no**" que vous pouvez.
+Dans ces fichiers il vous faut faire la correspondance entre les mots (ou phrases) dans la langue par défaut et ceux dans la langue d'arrivée.
+```
+Get Started : Commencer
+Let's begin : Commençons
+```
+Faites bien attention à ne pas sauter une ligne en fin de fichier sinon vous obtiendrez une erreur.
+Par défaut, le framework va récupérer la langue de l'utilisateur et essayera de traduire le texte dans cette langue si la langue n'est pas supportée ou que le mot n'a pas été traduit, il affichera le mot dans la langue par défaut.
+Cependant, si vous voulez que l'utilisateur puisse changer lui-même la langue du site, vous pouvez appeler dans vos contrôleurs la fonction : 
+```
+$this->changeLang("en");
+```
+En spécifiant en paramètre le code de la langue dans laquelle vous voulez que votre site apparaisse.
+
+La deuxième façon de traduire votre site repose sur les **defines**. La première chose est de modifier le fichier "**Defines/default.php**" en changeant au minimum la valeur de **USEDEFINETRANSLATE** en la mettant à **true**. Vous pouvez également passer la valeur de **USETRANSLATION** à **false** si vous ne souhaitez pas utiliser l'autre mode de traduction mais vous pouvez très bien laisser les deux à **true**.
+Maintenant il va falloir ajouter un dossier **Translations** dans le dossier **Defines** qui contiendra un dossier pour chaque langue supprtés par votre site. Ces dossiers contiendront des fichiers **.php** qui définiront des variables globales à utiliser dans votre site.
+Par exemple, dans le dossier **Defines/Translations/fr** on va mettre un fichier **home.php** qui contiendra :
+```
+<?php 
+define("TXT_START", "Commencer");
+define("TXT_CONNECT", "Connexion");
+?>
+```
+Et dans le dossier **Defines/Translations/en** on va mettre un autre fichier **home.php** qui contiendra :
+```
+<?php 
+define("TXT_START", "Get started");
+define("TXT_CONNECT", "Connection"); 
+?>
+```
+Maintenant, dans vos templates vous pouvez mettre : 
+```
+<h1><?= TXT_START ?></h1>
+```
+Le texte sera automatiquement traduit.
+Comme pour la première méthode de traduction il est possible de changer la langue depuis le contrôleur avec la mêle fonction : 
+```
+$this->changeLang("en");
+```
+
+Vous êtes maintenant en mesure de rendre votre site visible à l'international !
+
+### Les services
+Dans une application web il y a souvent des opérations que vous répétez dans différents contrôleurs. Pour éviter de les réécrire à chaque fois on vous a mis en place un système de service. 
+Si vous allez dans le dossier **Services** vous trouverez un fichier **redirect.php**. Ce fichier contient une classe permettant de rediriger l'utilisateur sur une page d'erreur 404 page not found.
+Pour l'utiliser dans votre contrôleur il suffit d'ajouter en haut du fichier juste après le **namespace** la ligne :
+```
+use Project\Services\Redirect;
+```
+Ensuite dans votre fonction de contrôleur appelez juste :
+```
+Redirect::redirectToError();
+```
+C'est tout votre utilisateur vas être rediriger directement sur une page d'erreur.
+Vous pouvez créer autant de services que vous le souhaitez afin de faciliter votre développement.
+Un autre service vous est proposé permettant d'uploader un fichier dans le dossier **Assets/Uploads**.
+
+### Les tests

@@ -149,4 +149,4 @@ On y retrouve une variable *PRODUCTION* qui spécifie l'état de l'application, 
 Mais vous pouvez ajouter autant de fichier dans ce dossier que vous le souhaitez afin de définir vos propres variables.
 
 ### Traduire son application
-
+Il y a deux manières de traduire votre application

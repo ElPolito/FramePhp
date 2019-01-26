@@ -149,4 +149,11 @@ On y retrouve une variable *PRODUCTION* qui spécifie l'état de l'application, 
 Mais vous pouvez ajouter autant de fichier dans ce dossier que vous le souhaitez afin de définir vos propres variables.
 
 ### Traduire son application
-Il y a deux manières de traduire votre application
+Il y a deux manières de traduire votre application.
+Tout d'abord il faut se rendre dans le fichier "**Defines/default.php**" pour changer la variable **DEFAULTLANG**, il faut mettre le code de la langue de votre site par défaut c'est à dire la langue utilisée dans vos templates.
+Ensuite il suffit de mettre cette ligne :
+```
+<?= $translate->translate('Get started'); ?>
+```
+Il vous faut donc mettre cette ligne dans les templates à chaque fois que vous souhaitez traduire un mot ou une phrase.
+Ensuite il suffit de se rendre dans le dossier "**Translations**" dans lequel vous allez trouver un dossier "**fr**" en fait ici il faut mettre autant de dossier que de langues supportées par votre site. Le nom des dossiers doit correspondre aux codes des différentes langues. Dans ces dossiers vous pouvez mettre autant de fichier "**.no**" que vous pouvez.

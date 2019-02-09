@@ -242,3 +242,32 @@ Vous pouvez créer autant de services que vous le souhaitez afin de faciliter vo
 Un autre service vous est proposé permettant d'uploader un fichier dans le dossier **Assets/Uploads**.
 
 ### Les tests
+Passons maintenant à la dernière partie. FramePhp vous permet de mettre en place des tests afin d'assurer la qualité de votre application. Avec cette technologie vous pourrez faire des tests unitaires, du TDD (Test Driven Development), de l'intégration et du déploiement continu. Trop cool :) !
+Bon passons à la pratique, vous avez sans doute remarqué un dossier "**Tests**", dans ce dossier vous trouverez un fichier "**testmanager.php**" qui contient une classe **TestManager** c'est cette classe et plus particulièrement la fonction **executeTests** qui sera appelée lors des tests. Vous pouvez commencer par initialiser certaines choses au besoin dans le constructeur.
+Maintenant testons :
+vous pouvez exécuter vos tests dans la fonction **executeTests** mais ce n'est pas très "propre" on vous incite donc à créer des fonctions dans la classe **TestManager** si vous avez peu de tests à réaliser ou carrément à créer d'autres classes dans le dossier **Tests** afin de bien séparé les différentes parties de votre application.
+Mais qu'est-ce que je peux tester ?
+Et bien on peut tout tester ! En effet, on va pouvoir tester un contrôleur simplement en instantiant de la classe **Controller** et en appelant la fonction correspondante. Cependant, il y a une petite subtilité, votre contrôleur, au lieu de retourner du code **HTML** retournera le tableau de paramêtres que vous passez à votre template afin de faciliter vos tests.
+On peut alors procéder de cette façon, dans notre classe de test, on ajoute les lignes : 
+```
+$controller = new DefaultController ();
+if(count($controller->home()["users"]) == 1) {
+  return true;
+}else{
+  throw new \Exception("Error nb users");
+}
+```
+Alors ce test n'est pas très efficace étant donné que dés que l'on ajoute un utilisateur dans la base de données, le test devient faux mais vous avez compris l'idée.
+Il faut aussi bien pensez à appeler les fonctions de tests dans la fonction **executeTests** du **TestManager**.
+Comme vous pouvez le voir on lance une **Exception** si le test ne passe pas. C'est une première technique afin de spécifier qu'il y a une erreur. Sinon on peut aussi retourner **true** ou **false** en fonction du résultat des tests depuis la fonction **executeTests** de **TestManager** ce qui spécifiera si tout est bon ou si il y a une erreur.
+
+C'est bien beau tout ça mais comment je les lance mes tests maintenant ?
+Et bien c'est très simple si vous n'utilisez pas de technologie comme **GitLab** ou **GitHub** qui permettent de lancer des tests automatiquement, il suffit de se placer dans votre dossier de travail avec la console et de lancer la commande :
+```
+php _config/hide/test.php 
+```
+Vous verrez alors le résultat de vos tests.
+
+Maintenant si vous utiliser **GitLab** il suffit d'ajouter un fichier **.gitlab-ci.yml** à la racine de votre application et de le faire exécuter la ligne précédante. Plus d'informations à cette addresse : https://docs.gitlab.com/ee/ci/README.html
+
+Et bien voilà vous êtes prêt à utiliser **FramePhp** !
